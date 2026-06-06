@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AMIeats - Order Confirmed!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .navbar { background-color: #c0392b !important; }
+        .navbar-brand { color: white !important; }
+        .success-card {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .check-circle {
+            width: 80px; height: 80px;
+            background: #27ae60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .order-number {
+            background: #fff3cd;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4" href="/"><i class="fas fa-utensils me-2"></i>AMIeats</a>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <div class="card success-card p-5 text-center">
+        <div class="check-circle">
+            <i class="fas fa-check fa-2x text-white"></i>
+        </div>
+        <h2 class="fw-bold text-success mb-2">Order Placed Successfully!</h2>
+
+
+        <div class="order-number mb-4" th:if="${order != null}">
+            Order Number: <span th:text="${order.orderNumber}"></span>
+        </div>
+
+        <div th:if="${order != null}" class="text-start mb-4">
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Customer</span>
+                <span fw-bold th:text="${order.customer.name}"></span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Delivery Address</span>
+                <span th:text="${order.deliveryAddress}"></span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Total Amount</span>
+                <span class="text-danger fw-bold">Rs. <span th:text="${order.totalAmount}"></span></span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Status</span>
+                <span class="badge bg-warning text-dark" th:text="${order.status}"></span>
+            </div>
+        </div>
+
+        <div class="d-flex gap-3 justify-content-center">
+            <a href="/" class="btn btn-danger px-4">Order More</a>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+    <p class="mb-0">© 2026 AMIeats. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AMIeats - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .navbar { background-color: #c0392b !important; }
+        .navbar-brand { color: white !important; }
+        .login-card {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        .login-btn { background-color: #c0392b; color: white; border: none; border-radius: 25px; padding: 10px; width: 100%; }
+        .login-btn:hover { background-color: #a93226; }
+        .logo-circle {
+            width: 70px; height: 70px;
+            background: #c0392b;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 15px;
+        }
+        .admin-badge {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 13px;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4" href="/"><i class="fas fa-utensils me-2"></i>AMIeats</a>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <div class="card login-card p-5">
+        <div class="text-center mb-4">
+            <div class="logo-circle">
+                <i class="fas fa-lock fa-2x text-white"></i>
+            </div>
+            <h3 class="fw-bold">Admin Portal</h3>
+            <p class="text-muted">AMIeats Management System</p>
+        </div>
+
+        <div class="admin-badge text-center mb-4">
+            <i class="fas fa-shield-alt me-1"></i>
+            For Staff & Admin Use Only
+        </div>
+
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+        <form th:action="@{/login/authenticate}" method="post">
+            <input type="hidden" name="userType" value="admin"/>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Email</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input type="email" name="email" class="form-control"
+                           placeholder="Enter your email" required>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="form-label fw-bold">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" name="password" class="form-control"
+                           placeholder="Enter your password" required>
+                </div>
+            </div>
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt me-2"></i>Login
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="/" class="text-danger text-decoration-none">
+                <i class="fas fa-arrow-left me-1"></i>Back to Website
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+    <p class="mb-0">© 2026 AMIeats. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
